@@ -20,13 +20,13 @@ Project Features:
 
 Project Structure:
 
-Model and Controller
+- Model and Controller
 
-View - View.java (Will simulate User Interface and actions taken by users)
+- View - View.java (Will simulate User Interface and actions taken by users)
 
-Database - DataStore.java (Will simulate a database such as SQL)
+- Database - DataStore.java (Will simulate a database such as SQL)
 
-Entities:
+- Entities:
     User, Bookmark, Book, Movie, Weblink
 
 Note: This project is inspired from semanticsqaure.com 
