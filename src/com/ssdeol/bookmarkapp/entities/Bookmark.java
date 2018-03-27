@@ -1,9 +1,12 @@
 package com.ssdeol.bookmarkapp.entities;
 
+import com.ssdeol.bookmarkapp.constants.KidFriendlyStatus;
+
 public abstract class Bookmark {
 	private long id;
 	private String title;
 	private String profileUrl;
+	private String kidFriendlyStatus = KidFriendlyStatus.UNKNOWN;
 
 	public long getId() {
 		return id;
@@ -30,4 +33,12 @@ public abstract class Bookmark {
 	}
 	
 	public abstract boolean isKidFriendlyEligible();
+
+	public String getKidFriendlyStatus() {
+		return kidFriendlyStatus;
+	}
+
+	public void setKidFriendlyStatus(String kidFriendlyStatus) {
+		this.kidFriendlyStatus = kidFriendlyStatus;
+	}
 }
