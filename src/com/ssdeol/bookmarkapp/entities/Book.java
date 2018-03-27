@@ -2,6 +2,8 @@ package com.ssdeol.bookmarkapp.entities;
 
 import java.util.Arrays;
 
+import com.ssdeol.bookmarkapp.constants.BookGenre;
+
 public class Book extends Bookmark {
 	private int publicationYear;
 	private String publisher;
@@ -52,6 +54,14 @@ public class Book extends Bookmark {
 	@Override
 	public String toString() {
 		return "Book [publicationYear= " + publicationYear + ", publisher = " + publisher + ", authors = " + Arrays.toString(authors) + ", genre = " + genre + ", amazonRating = " + amazonRating + "]";
+	}
+
+	@Override
+	public boolean isKidFriendlyEligible() {
+		if (genre.equals(BookGenre.PHILOSOPHY) || genre.equals(BookGenre.SELF_HELP)) {
+			return false;
+		}
+		return true;
 	}
 
 }
