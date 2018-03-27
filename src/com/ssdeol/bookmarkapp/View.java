@@ -5,6 +5,8 @@ import com.ssdeol.bookmarkapp.constants.UserType;
 import com.ssdeol.bookmarkapp.controllers.BookmarkController;
 import com.ssdeol.bookmarkapp.entities.Bookmark;
 import com.ssdeol.bookmarkapp.entities.User;
+import com.ssdeol.bookmarkapp.managers.BookmarkManager;
+import com.ssdeol.bookmarkapp.partner.Shareable;
 
 /**
  * In a real project, this class would simulate the User Interface. It will
@@ -30,20 +32,34 @@ public class View {
 					}
 				}
 
-				// Mark as kid-friendly
+				// Check if user is (chief) editor
 				if (user.getUserType().contentEquals(UserType.EDITOR)
 						|| user.getUserType().contentEquals(UserType.CHIEF_EDITOR)) {
+					
+					// Mark as kid-friendly
 					if (bookmark.isKidFriendlyEligible()
 							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
 						String kidFriendlyStatus = getKidFriendlyStatusDecision(bookmark);
 						if(!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
-							bookmark.setKidFriendlyStatus(kidFriendlyStatus);
-							System.out.println("Kid-Friendly Status: " + kidFriendlyStatus + ", " + bookmark);
+							BookmarkController.getInstance().setKidFriendlyStatus(user, kidFriendlyStatus, bookmark);
+						
+						}
+					}
+					
+					// Sharing!!
+					if(bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED) && bookmark instanceof Shareable) {
+						boolean isShared = getShareDecision();
+						if(isShared) {
+							BookmarkController.getInstance().share(user, bookmark);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private static boolean getShareDecision() {
+		return Math.random() < 0.5 ? true : false;
 	}
 
 	private static String getKidFriendlyStatusDecision(Bookmark bookmark) {

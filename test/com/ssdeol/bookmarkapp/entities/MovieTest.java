@@ -1,8 +1,6 @@
 package com.ssdeol.bookmarkapp.entities;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import com.ssdeol.bookmarkapp.constants.MovieGenre;
